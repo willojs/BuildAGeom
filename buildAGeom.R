@@ -6,7 +6,7 @@
 #' 
 #' @example 
 #' \dontrun{
-#'   load_hdata("data/ebtrk_atlc_1988_2015.txt")
+#'   load_hdata("~/BuildAGeom/ebtrk_atlc_1988_2015.txt")
 #' }
 #' 
 #' @export
@@ -117,9 +117,6 @@ geom_hurricane <- function(mapping = NULL, data = NULL, stat = 'identity',
 #' @param draw_key the function to draw the legend with the associated geom
 #' @param draw_group where the bulk of this geom is constructed
 #' 
-#' @examples
-#' \dontrun{ geom_hurricane(data = storm_observation, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw = sw, fill = wind_speed, color = wind_speed)
-#' }
 #' 
 #' @export
 geom_hurricane_proto <- ggproto("geom_hurricane_proto", Geom,
@@ -221,14 +218,14 @@ geom_hurricane_proto <- ggproto("geom_hurricane_proto", Geom,
 
 
 # List relevant packages
-packages <- c('readr', 'dplyr', 'stringr', 'tidyr', 'ggmap', 'geosphere')
+packages <- c('readr', 'dplyr', 'stringr', 'tidyr', 'ggmap', 'geosphere', 'curl')
 
 # Load packages
 lapply(packages, require, character.only = TRUE)
 
 
 # Read data into R, tidy it and filter it for Ike-2008 to create storm observation
-storm_observation <- load_hdata('data/ebtrk_atlc_1988_2015.txt') %>% 
+storm_observation <- load_hdata('~/BuildAGeom/ebtrk_atlc_1988_2015.txt') %>% 
   tidy_hdata() %>% 
   filter_hdata(hurricane = 'Ike-2008', observation = '2008-09-13 12:00:00')
 
